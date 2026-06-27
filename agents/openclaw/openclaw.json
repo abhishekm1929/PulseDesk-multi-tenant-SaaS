@@ -1,0 +1,17 @@
+{
+  "base_url": "https://api.eastrouter.com/api/anthropic",
+  "api_key": "${EASTROUTER_API_KEY}",
+  "model": "z-ai/glm-5.1",
+  "workspace": {
+    "working_dir": "./backend",
+    "command_execution": true
+  },
+  "slack": {
+    "enabled": true,
+    "channels": {
+      "agent_coder": "#agent-coder",
+      "agent_log": "#agent-log",
+      "ci_cd": "#ci-cd"
+    }
+  }
+}
