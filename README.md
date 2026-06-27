@@ -7,7 +7,6 @@ A modern **Multi-Tenant Help Desk SaaS** built during the **Forge 2 Hackathon** 
 
 Experience the platform live:
 * **Frontend App:** [PulseDesk Live](https://pulse-desk-multi-tenant-saa-s-git-main-forge21.vercel.app/)
-* **Backend API:** [PulseDesk Server](https://pulsedeskk.onrender.com)
 ## ✨ Features
 
 - 🔐 Secure Authentication (Laravel Sanctum)
