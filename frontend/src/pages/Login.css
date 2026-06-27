@@ -1,422 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign in</title>
-<style>
-  :root {
-    --primary: #667eea;
-    --primary-dark: #5563d6;
-    --primary-deep: #4c3a99;
-    --secondary: #764ba2;
-    --ink: #1a1a2e;
-    --muted: #6b6b7d;
-    --error-bg: #fff0f0;
-    --error-text: #c0392b;
-    --error-border: #ffd2d2;
-    --radius-lg: 20px;
-    --radius-md: 12px;
-    --shadow-card: 0 25px 60px -15px rgba(76, 58, 153, 0.35), 0 10px 25px -10px rgba(0,0,0,0.15);
-  }
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+}
 
-  * { box-sizing: border-box; }
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
 
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
-  }
+.login-card h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
 
-  .login-page {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-  }
+.login-card p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+}
 
-  /* Ambient animated glow — subtle, not distracting */
-  .login-page::before,
-  .login-page::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  .login-page::before {
-    width: 420px;
-    height: 420px;
-    background: #8e9bf5;
-    top: -120px;
-    left: -100px;
-    animation: drift1 14s ease-in-out infinite;
-  }
-  .login-page::after {
-    width: 480px;
-    height: 480px;
-    background: #9c6fc9;
-    bottom: -160px;
-    right: -120px;
-    animation: drift2 16s ease-in-out infinite;
-  }
+.login-card form {
+  display: flex;
+  flex-direction: column;
+}
 
-  @keyframes drift1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(40px, 30px) scale(1.08); }
-  }
-  @keyframes drift2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-30px, -20px) scale(1.1); }
-  }
+.login-card label {
+  margin-bottom: 6px;
+  margin-top: 15px;
+  font-weight: 600;
+  color: #333;
+}
 
-  .login-card {
-    width: 100%;
-    max-width: 380px;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(6px);
-    padding: 44px 36px 36px;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    position: relative;
-    z-index: 1;
-    animation: cardIn 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+.login-card input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+}
 
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(16px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
+.login-card input:focus {
+  outline: none;
+  border-color: #667eea;
+}
 
-  .login-card .icon-badge {
-    width: 52px;
-    height: 52px;
-    margin: 0 auto 18px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 20px -6px rgba(102, 126, 234, 0.55);
-  }
-  .login-card .icon-badge svg {
-    width: 24px;
-    height: 24px;
-    stroke: white;
-  }
+.login-card button {
+  margin-top: 25px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #667eea;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-  .login-card h1 {
-    text-align: center;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin: 0 0 6px;
-  }
+.login-card button:hover {
+  background: #5563d6;
+}
 
-  .login-card p.subtitle {
-    text-align: center;
-    color: var(--muted);
-    font-size: 14.5px;
-    margin: 0 0 28px;
-  }
+.login-card button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 
-  form { margin: 0; }
+.error {
+  margin-top: 15px;
+  padding: 10px;
+  background: #ffe6e6;
+  color: #c0392b;
+  border: 1px solid #ffb3b3;
+  border-radius: 6px;
+}
 
-  .field {
-    position: relative;
-    margin-top: 18px;
-  }
-
-  .field label {
-    position: absolute;
-    left: 14px;
-    top: 14px;
-    font-size: 15px;
-    color: var(--muted);
-    font-weight: 500;
-    pointer-events: none;
-    transform-origin: left top;
-    transition: transform 0.18s ease, color 0.18s ease;
-    background: transparent;
-  }
-
-  .field input {
-    width: 100%;
-    padding: 14px;
-    padding-top: 14px;
-    border-radius: var(--radius-md);
-    border: 1.5px solid #e2e2ea;
-    font-size: 15.5px;
-    font-family: inherit;
-    color: var(--ink);
-    background: #fafafe;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-  }
-
-  .field input::placeholder { color: transparent; }
-
-  .field input:focus {
-    outline: none;
-    border-color: var(--primary);
-    background: white;
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
-  }
-
-  /* Floating label: rises when focused or filled */
-  .field input:focus + label,
-  .field input:not(:placeholder-shown) + label {
-    transform: translateY(-26px) scale(0.82);
-    color: var(--primary);
-    font-weight: 600;
-  }
-
-  .field.has-toggle input { padding-right: 46px; }
-
-  .toggle-visibility {
-    position: absolute;
-    right: 12px;
-    top: 14px;
-    width: 28px;
-    height: 28px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    border-radius: 6px;
-    transition: color 0.15s ease, background 0.15s ease;
-  }
-  .toggle-visibility:hover { color: var(--primary); background: #f1f1fb; }
-  .toggle-visibility svg { width: 19px; height: 19px; }
-
-  .field-footer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 8px;
-  }
-  .field-footer a {
-    font-size: 13px;
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .field-footer a:hover { text-decoration: underline; }
-
-  button[type="submit"] {
-    width: 100%;
-    margin-top: 22px;
-    padding: 14px;
-    border: none;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: 0 10px 24px -8px rgba(102, 126, 234, 0.55);
-    transition: transform 0.12s ease, box-shadow 0.15s ease, opacity 0.15s ease, background 0.15s ease;
-  }
-  button[type="submit"]:hover {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-deep));
-    box-shadow: 0 12px 28px -8px rgba(76, 58, 153, 0.55);
-  }
-  button[type="submit"]:active { transform: translateY(1px) scale(0.995); }
-  button[type="submit"]:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none;
-  }
-  button[type="submit"]:focus-visible {
-    outline: 3px solid rgba(102, 126, 234, 0.5);
-    outline-offset: 2px;
-  }
-
-  .spinner {
-    width: 17px;
-    height: 17px;
-    border: 2px solid rgba(255,255,255,0.4);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    display: none;
-  }
-  button[type="submit"].loading .spinner { display: inline-block; }
-  button[type="submit"].loading .btn-label { opacity: 0.85; }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .error {
-    margin-top: 16px;
-    padding: 11px 14px;
-    background: var(--error-bg);
-    color: var(--error-text);
-    border: 1px solid var(--error-border);
-    border-radius: 10px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    animation: shake 0.4s ease;
-  }
-  .error svg { width: 17px; height: 17px; flex-shrink: 0; }
-
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-6px); }
-    40% { transform: translateX(5px); }
-    60% { transform: translateX(-3px); }
-    80% { transform: translateX(2px); }
-  }
-
-  .demo {
-    margin-top: 24px;
-    text-align: center;
-  }
-  .demo-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    background: #f4f3fb;
-    border: 1px dashed #d6d2ef;
-    border-radius: 999px;
-    color: #5a5a72;
-    font-size: 12.5px;
-    font-weight: 500;
-  }
-  .demo-chip code {
-    background: #e9e7f9;
-    padding: 2px 6px;
-    border-radius: 5px;
-    color: var(--primary-deep);
-    font-size: 12px;
-  }
-
-  @media (max-width: 420px) {
-    .login-card { padding: 36px 24px 28px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .login-page::before, .login-page::after,
-    .login-card, .spinner, .error,
-    button, .field input, .field label {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-</style>
-</head>
-<body>
-
-<div class="login-page">
-  <div class="login-card">
-    <div class="icon-badge">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-      </svg>
-    </div>
-    <h1>Welcome back</h1>
-    <p class="subtitle">Sign in to continue to your account</p>
-
-    <form id="loginForm" novalidate>
-      <div class="field">
-        <input type="email" id="email" placeholder=" " autocomplete="username" required>
-        <label for="email">Email address</label>
-      </div>
-
-      <div class="field has-toggle">
-        <input type="password" id="password" placeholder=" " autocomplete="current-password" required minlength="6">
-        <label for="password">Password</label>
-        <button type="button" class="toggle-visibility" id="toggleBtn" aria-label="Show password">
-          <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-          </svg>
-        </button>
-      </div>
-
-      <div class="field-footer">
-        <a href="#">Forgot password?</a>
-      </div>
-
-      <button type="submit" id="submitBtn">
-        <span class="spinner"></span>
-        <span class="btn-label">Sign in</span>
-      </button>
-
-      <div class="error" id="errorBox" style="display:none;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="12"></line>
-          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-        </svg>
-        <span id="errorText">Incorrect email or password.</span>
-      </div>
-    </form>
-
-    <div class="demo">
-      <span class="demo-chip">Demo login — <code>demo@app.com</code> / <code>demo123</code></span>
-    </div>
-  </div>
-</div>
-
-<script>
-  const form = document.getElementById('loginForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const errorBox = document.getElementById('errorBox');
-  const errorText = document.getElementById('errorText');
-  const toggleBtn = document.getElementById('toggleBtn');
-  const passwordInput = document.getElementById('password');
-  const eyeIcon = document.getElementById('eyeIcon');
-
-  toggleBtn.addEventListener('click', () => {
-    const isHidden = passwordInput.type === 'password';
-    passwordInput.type = isHidden ? 'text' : 'password';
-    toggleBtn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
-    eyeIcon.innerHTML = isHidden
-      ? '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a18.5 18.5 0 0 1 4.22-5.06M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>'
-      : '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path><circle cx="12" cy="12" r="3"></circle>';
-  });
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    errorBox.style.display = 'none';
-    submitBtn.classList.add('loading');
-    submitBtn.disabled = true;
-
-    // Simulated auth check — replace with a real request
-    setTimeout(() => {
-      const email = document.getElementById('email').value;
-      const password = passwordInput.value;
-      const success = email === 'demo@app.com' && password === 'demo123';
-
-      submitBtn.classList.remove('loading');
-      submitBtn.disabled = false;
-
-      if (!success) {
-        errorText.textContent = 'Incorrect email or password.';
-        errorBox.style.display = 'flex';
-      } else {
-        errorText.textContent = '';
-        errorBox.style.display = 'none';
-        submitBtn.querySelector('.btn-label').textContent = 'Signed in ✓';
-      }
-    }, 900);
-  });
-</script>
-
-</body>
-</html>
+.demo {
+  margin-top: 25px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
