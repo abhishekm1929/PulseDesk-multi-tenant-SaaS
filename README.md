@@ -6,7 +6,7 @@ A modern **Multi-Tenant Help Desk SaaS** built during the **Forge 2 Hackathon** 
 ## 🌐 Live Links
 
 Experience the platform live:
-* **Frontend App:** [PulseDesk Live](https://pulsedeskk.netlify.app/)
+* **Frontend App:** [PulseDesk Live](https://pulse-desk-multi-tenant-saa-s-git-main-forge21.vercel.app/login)
 * **Backend API:** [PulseDesk Server](https://pulsedeskk.onrender.com)
 ## ✨ Features
 
