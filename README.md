@@ -3,11 +3,11 @@
 A modern **Multi-Tenant Help Desk SaaS** built during the **Forge 2 Hackathon** using **Laravel 11, React, MySQL, and Tailwind CSS**.
 
 
-## 🌐 Live Link
+## 🌐 Live Links
 
 Experience the platform live:
-* **Production URL:** [PulseDesk Live](https://pulsedesk.example.com)
-
+* **Frontend App:** [PulseDesk Live](https://pulsedeskk.netlify.app/)
+* **Backend API:** [PulseDesk Server](https://pulsedeskk.onrender.com)
 ## ✨ Features
 
 - 🔐 Secure Authentication (Laravel Sanctum)
