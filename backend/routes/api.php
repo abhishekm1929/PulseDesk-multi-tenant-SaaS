@@ -18,6 +18,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::middleware(['tenant'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index']);
 
+        // Staff / Agents list for assignment
+        Route::get('/agents', [TicketController::class, 'agents']);
+
+        // CSV Export (before resource route)
+        Route::get('/tickets/export/csv', [TicketController::class, 'exportCsv']);
+
+        // Quick update for fast status/assignee/priority toggling
+        Route::patch('/tickets/{ticket}/quick-update', [TicketController::class, 'quickUpdate']);
+
         // Tickets CRUD + filters
         Route::apiResource('tickets', TicketController::class);
 
